@@ -1,10 +1,18 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
 from geopy.distance import geodesic
+
+import networkx as nx
+
+def solve_tsp(distance_matrix):
+    # Create a complete graph from the distance matrix
+    G = nx.Graph()
+    for city, distances in distance_matrix.items():
+        for target_city, distance in distances.items():
+            G.add_edge(city, target_city, weight=distance)
+
+    # Solve TSP using Christofides algorithm
+    tsp_solution = nx.approximation.traveling_salesman_problem(G, cycle=True)
+
+    return tsp_solution
 
 def calculate_distance_matrix(locations):
     distance_matrix = {}
@@ -28,32 +36,7 @@ locations = {
 }
 
 distance_matrix = calculate_distance_matrix(locations)
-distance_matrix
-
-
-# In[4]:
-
-
-import networkx as nx
-
-def solve_tsp(distance_matrix):
-    # Create a complete graph from the distance matrix
-    G = nx.Graph()
-    for city, distances in distance_matrix.items():
-        for target_city, distance in distances.items():
-            G.add_edge(city, target_city, weight=distance)
-
-    # Solve TSP using Christofides algorithm
-    tsp_solution = nx.approximation.traveling_salesman_problem(G, cycle=True)
-
-    return tsp_solution
+print(distance_matrix)
 
 tsp_solution = solve_tsp(distance_matrix)
-tsp_solution
-
-
-# In[ ]:
-
-
-
-
+print(tsp_solution)
