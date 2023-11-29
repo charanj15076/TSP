@@ -3,7 +3,16 @@ import matplotlib.pyplot as plt
 import math
 import networkx as nx
 
-def solve_tsp(pos):
+def solve_tsp(location):
+    #Convert location dictionary to pos dictionary
+    city=0
+    pos=dict()
+    mapper_dict=dict()
+    for i in location:
+        pos[city]=location[i]
+        mapper_dict[city]=i
+        city+=1
+    
     # Create a complete graph from the distance matrix
     G = nx.Graph()
     #pos[0] = (0.5, 0.5)
@@ -26,21 +35,34 @@ def solve_tsp(pos):
         with_labels=True,
         edgelist=edge_list,
         edge_color="red",
-        node_size=200,
+        node_size=1000,
         width=3,
+        arrows=True,
+        arrowstyle= '-|>',
+        labels=mapper_dict,
+        
     )
-    plt.title("The optimal path using Cristofides")
+    #plt.figure("Christofides")
+    plt.title("The optimal path using Christofides")
     plt.show()
-    return tsp_solution
+    return edge_list
 
 # Example locations with city names as keys and (latitude, longitude) as values
 locations = {
+    "City1": [52.5200, 13.4050],
+    "City2": [53.5511, 9.9937],
+    "City3": [48.1351, 11.5820],
+    "City4": [50.9375, 6.9603],
+    "City5": [50.1109, 8.6821]
+}
+"""locations = {
     0: [52.5200, 13.4050],
     1: [53.5511, 9.9937],
     2: [48.1351, 11.5820],
     3: [50.9375, 6.9603],
     4: [50.1109, 8.6821]
 }
+"""
 
 #distance_matrix = calculate_distance_matrix(locations)
 #print(distance_matrix)
