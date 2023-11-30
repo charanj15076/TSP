@@ -2,8 +2,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from networkx.algorithms.approximation.traveling_salesman import simulated_annealing_tsp
 
-def simulated_annealing(G,pos,mapper_dict,weight="weight"):
-    nodes=simulated_annealing_tsp(G,"greedy",weight="weight")
+def simulated_annealing(G,pos,mapper_dict,epochs,temperature,weight="weight"):
+    nodes=simulated_annealing_tsp(G,"greedy",weight="weight",max_iterations=epochs,temp=temperature)
     edge_list = list(nx.utils.pairwise(nodes))
     # Draw closest edges on each node only
     nx.draw_networkx_edges(G, pos, edge_color="blue", width=0.5)

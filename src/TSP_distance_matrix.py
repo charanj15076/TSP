@@ -28,7 +28,7 @@ def solve_tsp(location,technique):
     if (technique=="Christofides"):
         tsp_solution = christofides(G,pos,mapper_dict,weight="weight")
     elif (technique=="Simulated Annealing"):
-        tsp_solution = simulated_annealing(G,pos,mapper_dict,weight="weight")
+        tsp_solution = simulated_annealing(G,pos,mapper_dict,weight="weight",epochs=50,temperature=300)
     elif (technique=="Greedy"):
         tsp_solution = greedy(G,pos,mapper_dict,weight="weight")
     #Default
@@ -46,6 +46,6 @@ locations = {
 }
 
 #tsp_solution = solve_tsp(locations,"Christofides")
-#tsp_solution = solve_tsp(locations,"Simulated Annealing")
-tsp_solution = solve_tsp(locations,"Greedy")
+tsp_solution = solve_tsp(locations,"Simulated Annealing")
+#tsp_solution = solve_tsp(locations,"Greedy")
 print(tsp_solution)
