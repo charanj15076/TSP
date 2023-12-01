@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true">
+  <div id="map"></div>
+
+  <ion-fab slot="fixed" vertical="top" horizontal="start">
+    <ion-row>
+      <ion-col>
+        <ion-button id="current-location-button" shape="circle" class="ion-no-padding ion-no-margin" (click)="viewCurrentLocation()">
+          <ion-icon slot="icon-only" name="locate"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button id="search-button" expand="block" shape="circle" class="ion-no-padding ion-no-margin">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-col>
+          <ion-button id="geo-list-button" shape="circle" class="ion-no-padding ion-no-margin">
+            <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-fab>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-row>
+      <ion-col>
+        <ion-button id="add-button" shape="circle" class="ion-no-padding ion-no-margin" (click)="addDestination()">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button id="clear-button" shape="circle" class="ion-no-padding ion-no-margin" (click)="removeAllDestinations()">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-fab-button>
+          <ion-icon name="ellipsis-horizontal"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button data-desc="Christofedes">
+            <ion-icon name="globe-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button data-desc="Greedy">
+            <ion-icon name="git-branch"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button data-desc="Simulated Annealing" (click)="viewCurrentLocation()">
+            <ion-icon name="thermometer-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-col>
+    </ion-row>
+  </ion-fab>
+
+  <app-geo-search-bar
+    title="Search"
+    trigger="search-button"
+    (selectedChanged)="onsSearchResultSelected($event)"
+    #select
+  >
+  </app-geo-search-bar>
+
+  <ion-modal trigger="geo-list-button" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div class="block">
+        <ion-list-header><h3>Destinations</h3></ion-list-header>
+        <ion-list>
+          <ion-item *ngFor="let d of destinations; let i = index;">
+            <ion-label>{{i}} [{{ d[0] }}, {{ d[1] }}]</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-template>
+  </ion-modal>
+  
+  
+</ion-content>
+
+

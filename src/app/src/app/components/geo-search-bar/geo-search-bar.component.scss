@@ -1,0 +1,33 @@
+// ion-toolbar {
+//     padding: 1em 1em 0;
+// }
+
+.results-container {
+    max-height: 300px;
+    // padding-bottom: 1em;
+
+    &[scrolly=true] {
+        overflow-y: auto;
+    }
+}
+
+.search-result {
+    --min-height: 2em;
+    
+    ion-label {
+        margin: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 1em;
+    }
+}
+
+ion-modal {
+    --height: auto;
+}
+
+.error-message {
+    font-style: italic;
+    opacity: 0.7;
+}
