@@ -64,11 +64,11 @@
 
   <ion-modal trigger="geo-list-button" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
     <ng-template>
-      <div class="block">
+      <div class="list-block">
         <ion-list-header><h3>Destinations</h3></ion-list-header>
-        <ion-list>
+        <ion-list style="max-height: 500px; overflow-y: auto;" >
           <ion-item *ngFor="let d of destinations; let i = index;">
-            <ion-label>{{i}} [{{ d[0] }}, {{ d[1] }}]</ion-label>
+            <ion-label>{{ i }} - [{{ d[0] }}, {{ d[1] }}]</ion-label>
           </ion-item>
         </ion-list>
       </div>
