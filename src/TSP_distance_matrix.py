@@ -79,7 +79,11 @@ locations = {
 }
 
 tsp_solution, lookup = solve_tsp(locations,"Christofides")
-#tsp_solution, lookup = solve_tsp(locations,"Simulated Annealing")
-#tsp_solution, lookup = solve_tsp(locations,"Greedy")
+print(tsp_solution)
+print(lookup)
+tsp_solution, lookup = solve_tsp(locations,"Simulated Annealing")
+print(tsp_solution)
+print(lookup)
+tsp_solution, lookup = solve_tsp(locations,"Greedy")
 print(tsp_solution)
 print(lookup)
