@@ -2,8 +2,6 @@ import { Component, ElementRef } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
-import { BlockageService } from 'src/services/blockage.service';
-import { SimulationService } from 'src/services/simulation.service';
 import { RoutesService } from 'src/services/routes.service';
 
 import * as L from "leaflet";
@@ -41,12 +39,7 @@ export class HomePage {
 
   polylines: any[] = [];
   destinations: any[] = [];
-  destinationsDetails: any[] = [];
   destinationsMarks: any[] = [];
-
-  // list of blockages in the current area
-  // blockagesNearby: any[] = [];
-  // blockagesMarksMap = new Map<number, L.Marker>();
 
   constructor(
     private loadingCtrl: LoadingController,
@@ -152,6 +145,14 @@ export class HomePage {
     });
   }
 
+  async viewLocation(lat: any, lng: any) {
+    this.myMap?.setView([lat, lng], this.myMap.getZoom(), {
+      animate: true,
+      duration: 1,
+      easeLinearity: 0.25
+    });
+  }
+
   // add a destination
   addDestination() {
     if (this.focusLocationMark == undefined) {
@@ -198,7 +199,6 @@ export class HomePage {
 
     this.destinations.push([lat, lng]);
     this.destinationsMarks.push(marker);
-    // this.blockagesMarksMap.set(res.id, marker);
 
     this.presentToast('Destination added.', 'success');
     console.log(this.destinations)

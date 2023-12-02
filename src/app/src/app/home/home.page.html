@@ -68,7 +68,7 @@
         <ion-list-header><h3>Destinations</h3></ion-list-header>
         <ion-list style="max-height: 500px; overflow-y: auto;" >
           <ion-item *ngFor="let d of destinations; let i = index;">
-            <ion-label>{{ i }} - [{{ d[0] }}, {{ d[1] }}]</ion-label>
+            <ion-label (click)="viewLocation(d[0], d[1])">{{ i }}: [{{ d[0] }}, {{ d[1] }}]</ion-label>
           </ion-item>
         </ion-list>
       </div>
