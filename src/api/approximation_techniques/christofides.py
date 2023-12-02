@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 
 def christofides(G, weight="weight"):
     tree=None
@@ -38,5 +37,8 @@ def christofides(G, weight="weight"):
             nodes.append(u)
         nodes.append(v)
     nodes.append(nodes[0])
-    return nodes
+
+    edge_list = list(nx.utils.pairwise(nodes))
+    return edge_list
+    # return nodes
 

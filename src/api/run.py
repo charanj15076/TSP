@@ -13,7 +13,7 @@ from flask import request
 from flask_restful import Resource, Api
 from flask_cors import CORS
 
-from services import run_simulation, get_shortest_paths
+from services import solve_tsp
 
 load_dotenv()
 
@@ -42,12 +42,16 @@ class Home(Resource):
 
 class Run(Resource):
     # solve TSP given list of destinations
-    def get(self):
-        args = request.args
-        destination_list = args['destination_list']
-        technique = args['technique']
+    def post(self):
+        # args = request.args
+        # destination_list = args['destination_list']
+        # technique = args['technique']
 
-        edge_list = run_tsp() #TODO-pass arguments
+        json_data = request.get_json(force=True)
+        destination_list = json_data['destination_list']
+        technique = json_data['technique']
+
+        edge_list = solve_tsp(destination_list, technique) 
 
         routes_merged = gpd.GeoDataFrame( pd.concat( edge_list, ignore_index=True) )
 

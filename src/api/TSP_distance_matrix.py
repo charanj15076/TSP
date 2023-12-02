@@ -1,4 +1,4 @@
-from geopy.distance import geodesic
+#from geopy.distance import geodesic
 import math
 import networkx as nx
 import osmnx as ox
@@ -19,8 +19,8 @@ def solve_tsp(location,technique):
         city+=1
     """
     locations=list(location.values())
-    latitudes=[loc[1] for loc in locations]
-    longitudes=[loc[0] for loc in locations]
+    latitudes=[loc[0] for loc in locations]
+    longitudes=[loc[1] for loc in locations]
     #print(latitudes)
     #print(longitudes)
     lookup=dict()
@@ -35,14 +35,13 @@ def solve_tsp(location,technique):
             G1.add_edge(i, j, weight=dist)
     """
     
-    north = max(latitudes)
-    south = min(latitudes) 
-    west = min(longitudes)
-    east = max(longitudes)
-    print(north)
+    north = max(latitudes) * 1.0001
+    south = min(latitudes) * 1.0001
+    west = min(longitudes) * 1.0001
+    east = max(longitudes) * 1.0001
     
     # Download the street network graph for the specified area
-    G1 = ox.graph_from_bbox(north, south, east, west,retain_all=True, truncate_by_edge=True,network_type='drive')
+    G1 = ox.graph_from_bbox(north, south, east, west, retain_all=True, truncate_by_edge=True, network_type='drive')
     #G1 = ox.graph_from_point((33.72773047528036, -117.95608520507814), dist=80, network_type='walk')
     print(G1)
     G = nx.Graph()
@@ -96,13 +95,13 @@ locations = {
 #locations=list(locations1.values())
 #print(locations)
 
-#tsp_solution, lookup = solve_tsp(locations,"Christofides")
+tsp_solution, lookup = solve_tsp(locations,"Christofides")
 #print(tsp_solution)
 #print(lookup)
 #tsp_solution, lookup = solve_tsp(locations,"Simulated Annealing")
 #print(tsp_solution)
 #print(lookup)
-tsp_solution, lookup = solve_tsp(locations,"Greedy")
+# tsp_solution, lookup = solve_tsp(locations,"Greedy")
 #solve_tsp(locations,"Greedy")
 print(tsp_solution)
 print(lookup)

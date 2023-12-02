@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 from networkx.algorithms.approximation.traveling_salesman import simulated_annealing_tsp
 
 def simulated_annealing(G,epochs,temperature,weight="weight"):

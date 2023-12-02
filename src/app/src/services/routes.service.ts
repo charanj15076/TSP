@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import * as L from "leaflet";
  
-export interface GetResult {
+export interface Result {
   data: any;
   status: string;
 }
@@ -16,20 +15,13 @@ export interface GetResult {
 export class RoutesService {
   constructor(private http: HttpClient) {}
  
-  // get all blockages within a certain boundary rectangle
-  getRoutes(source: L.LatLng, destination: L.LatLng): Observable<GetResult> {
-    const params = new HttpParams({
-      fromObject: {
-        source_lng: source.lng,
-        source_lat: source.lat,
-        destination_lng: destination.lng,
-        destination_lat: destination.lat,
+  runTSP(postData: any): Observable<Result> {
+    return this.http.post<Result>(
+      `${environment.baseUrl}/run`,
+      { 
+        destination_list: postData.destinationList,
+        technique: postData.technique,
       }
-    });
-
-    return this.http.get<GetResult>(
-      `${environment.baseUrl}/routes`,
-      { params: params }
     );
   }
 }

@@ -40,13 +40,13 @@
           <ion-icon name="ellipsis-horizontal"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button data-desc="Christofedes">
+          <ion-fab-button data-desc="Christofides" (click)="solveTSP('Christofides')">
             <ion-icon name="globe-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button data-desc="Greedy">
+          <ion-fab-button data-desc="Greedy" (click)="solveTSP('Greedy')">
             <ion-icon name="git-branch"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button data-desc="Simulated Annealing" (click)="viewCurrentLocation()">
+          <ion-fab-button data-desc="Simulated Annealing" (click)="solveTSP('Simulated Annealing')">
             <ion-icon name="thermometer-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
@@ -69,6 +69,7 @@
         <ion-list style="max-height: 500px; overflow-y: auto;" >
           <ion-item *ngFor="let d of destinations; let i = index;">
             <ion-label (click)="viewLocation(d[0], d[1])">{{ i }}: [{{ d[0] }}, {{ d[1] }}]</ion-label>
+            <ion-icon color="danger" slot="end" name="trash-outline" size="small" (click)="removeDestinationIdx(i)"></ion-icon>
           </ion-item>
         </ion-list>
       </div>
