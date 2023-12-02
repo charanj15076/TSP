@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-def christofides(G, pos, mapper_dict,weight="weight"):
+def christofides(G, weight="weight"):
     loop_nodes = nx.nodes_with_selfloops(G)
     try:
         node = next(loop_nodes)
@@ -40,24 +40,4 @@ def christofides(G, pos, mapper_dict,weight="weight"):
     
     edge_list = list(nx.utils.pairwise(nodes))
 
-    # Draw closest edges on each node only
-    nx.draw_networkx_edges(G, pos, edge_color="blue", width=0.5)
-
-    # Draw the route
-    nx.draw_networkx(
-        G,
-        pos,
-        with_labels=True,
-        edgelist=edge_list,
-        edge_color="red",
-        node_size=1000,
-        width=3,
-        arrows=True,
-        arrowstyle= '-|>',
-        labels=mapper_dict,
-        
-    )
-    #plt.figure("Christofides")
-    plt.title("The optimal path using Christofides")
-    plt.show()
     return edge_list
